@@ -1,27 +1,8 @@
 const express = require("express");
 const multer = require("multer");
-const mysql = require("mysql2");
-const cors = require("cors");
-const path = require("path");
+const db = require("../config/db");
+const router = express.Router();
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "priyanka",
-  database: "wedigit",
-});
-
-db.connect((err) => {
-  if (err) throw err;
-  console.log("MySQL connected...");
-});
-
-// File storage configuration
 const storage = multer.diskStorage({
   destination: "./uploads/",
   filename: (req, file, cb) => {
@@ -31,14 +12,12 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Validate email format
 const isValidEmail = (email) => {
   const emailRegex = /^\S+@\S+\.\S+$/;
   return emailRegex.test(email);
 };
 
-// Claim submission endpoint
-app.post("/api/claims", upload.single("document"), (req, res) => {
+router.post("/", upload.single("document"), (req, res) => {
   const {
     name,
     email,
@@ -74,10 +53,9 @@ app.post("/api/claims", upload.single("document"), (req, res) => {
   );
 });
 
-// Fetch all claims endpoint
-app.get("/api/claims", (req, res) => {
-  console.log("GET /api/claims hit!"); 
-  const query = "SELECT * FROM claims ORDER BY created_at DESC";
+router.get("/", (req, res) => {
+  console.log("GET /api/claims hit!");
+  const query = "SELECT * FROM ORDER BY created_at DESC";
   db.query(query, (err, results) => {
     if (err) {
       console.error("Error fetching claims:", err);
@@ -87,5 +65,4 @@ app.get("/api/claims", (req, res) => {
   });
 });
 
-const PORT = 7000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+module.exports = router;
