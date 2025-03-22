@@ -35,6 +35,8 @@ Frontend Setup:
 
 cd frontend
 npm install
+Create a .env file:
+REACT_APP_API_BASE_URL=http://localhost:5000
 npm start
 
 
