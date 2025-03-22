@@ -11,8 +11,8 @@ Database: MySQL
 Setup Instructions
 Clone the Repository:
 
-git clone https://github.com/username/claim-management.git
-cd claim-management
+git clone https://github.com/primehta17/wedigitproject.git
+cd wedigitproject
 
 
 Backend Setup:
@@ -54,7 +54,7 @@ CREATE TABLE claims (
 );
 
 
- API Endpoints
+API Endpoints
 POST /api/claims - Add a new claim
 
 GET /api/claims - Get all claims
