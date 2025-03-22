@@ -2,13 +2,13 @@ import React from "react";
 
 function ClaimsTable({ claims }) {
   return (
-    <div className="bg-white shadow-lg rounded-lg p-4 w-full max-w-5xl overflow-x-auto">
-      <h3 className="text-xl font-bold mb-4 text-center text-gray-700">
+    <div className="bg-white shadow-lg rounded-2xl p-6 w-full max-w-5xl overflow-x-auto border border-gray-200">
+      <h3 className="text-2xl font-semibold mb-6 text-gray-800  border-b" >
         All Submitted Claims
       </h3>
       <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200">
-          <thead className="bg-gray-100">
+        <table className="min-w-full bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <thead className="bg-gray-50 text-gray-600 text-sm uppercase">
             <tr>
               {[
                 "ID",
@@ -23,24 +23,31 @@ function ClaimsTable({ claims }) {
               ].map((head) => (
                 <th
                   key={head}
-                  className="px-4 py-2 border text-left text-sm font-medium text-gray-600"
+                  className="px-5 py-3 text-left font-medium tracking-wider border-b"
                 >
                   {head}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody>
-            {claims.map((claim) => (
-              <tr key={claim.id} className="hover:bg-gray-50 transition">
-                <td className="px-4 py-2 border">{claim.id}</td>
-                <td className="px-4 py-2 border">{claim.name}</td>
-                <td className="px-4 py-2 border">{claim.email}</td>
-                <td className="px-4 py-2 border">{claim.phone}</td>
-                <td className="px-4 py-2 border">{claim.claim_type}</td>
-                <td className="px-4 py-2 border">${claim.claim_amount}</td>
-                <td className="px-4 py-2 border">{claim.claim_description}</td>
-                <td className="px-4 py-2 border">
+          <tbody className="text-gray-700 text-sm">
+            {claims.map((claim, index) => (
+              <tr
+                key={claim.id}
+                className={`${
+                  index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                } hover:bg-gray-100 transition`}
+              >
+                <td className="px-5 py-3 border-b">{claim.id}</td>
+                <td className="px-5 py-3 border-b">{claim.name}</td>
+                <td className="px-5 py-3 border-b">{claim.email}</td>
+                <td className="px-5 py-3 border-b">{claim.phone}</td>
+                <td className="px-5 py-3 border-b">{claim.claim_type}</td>
+                <td className="px-5 py-3 border-b text-green-600 font-medium">
+                  ${claim.claim_amount}
+                </td>
+                <td className="px-5 py-3 border-b">{claim.claim_description}</td>
+                <td className="px-5 py-3 border-b">
                   {claim.document_url ? (
                     <a
                       href={claim.document_url}
@@ -51,10 +58,10 @@ function ClaimsTable({ claims }) {
                       View
                     </a>
                   ) : (
-                    "No Document"
+                    <span className="text-gray-400">No Document</span>
                   )}
                 </td>
-                <td className="px-4 py-2 border">
+                <td className="px-5 py-3 border-b text-gray-500">
                   {new Date(claim.created_at).toLocaleString()}
                 </td>
               </tr>
@@ -67,5 +74,3 @@ function ClaimsTable({ claims }) {
 }
 
 export default ClaimsTable;
-
- 

@@ -23,14 +23,14 @@ function App() {
 
   return (
     <div className="bg-white shadow-lg rounded-lg w-full h-screen mx-auto">
-      {/* Header */}
+  
       <div className="bg-gray-900 text-white p-4 text-lg font-semibold">
-        Claims Form
+      Claims Form
       </div>
 
       <div className="flex flex-col lg:flex-row h-full">
-        {/* Sidebar / Tabs */}
-        <div className="w-full lg:w-1/5 bg-gray-50 border-r p-6 space-y-4 h-full">
+     
+        <div className="w-full lg:w-1/5 bg-gray-50 border-r p-6 space-y-4">
           <h3 className="text-lg font-semibold text-green-600">Claim Process</h3>
           <ul className="space-y-4 text-sm">
             <li
@@ -66,7 +66,6 @@ function App() {
           </ul>
         </div>
 
-        {/* Main Content */}
         <div className="w-full lg:w-4/5 p-6 overflow-auto">
           {activeTab === "bond" && <ClaimForm onSuccess={loadClaims} />}
           {activeTab === "claim" && <ClaimsTable claims={claims} />}
