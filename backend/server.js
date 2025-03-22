@@ -24,5 +24,9 @@ app.use(function(req, res, next) {
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/claims', claimRoutes);
 
+app.get("/",(req,res)=>{
+  res.send("welcome to the product Api")
+})
+
 const PORT = process.env.PORT || 6663;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
