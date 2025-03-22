@@ -5,7 +5,7 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;;
 export const submitClaim = async (formData) => {
   try {
     // Send the POST request with the formData object
-    const response = await axios.post(`${API_BASE_URL}/claims`, formData, {
+    const response = await axios.post(`${API_BASE_URL}/api/claims`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -21,7 +21,7 @@ export const submitClaim = async (formData) => {
 
 export const fetchClaims = async () => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/claims`);
+    const response = await axios.get(`${API_BASE_URL}/api/claims`);
     return response.data;
   } catch (error) {
     throw new Error("Error fetching claims.");
